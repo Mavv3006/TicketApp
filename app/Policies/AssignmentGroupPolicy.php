@@ -10,17 +10,17 @@ class AssignmentGroupPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool
+    public function viewAny(): bool
     {
         return true;
     }
 
-    public function view(User $user, AssignmentGroup $assignmentGroup): bool
+    public function view(): bool
     {
         return true;
     }
 
-    public function create(User $user): bool
+    public function create(): bool
     {
         return true;
     }
@@ -40,7 +40,7 @@ class AssignmentGroupPolicy
         return $user->id == $assignmentGroup->managedBy->id;
     }
 
-    public function forceDelete(User $user, AssignmentGroup $assignmentGroup): bool
+    public function forceDelete(): bool
     {
         return false;
     }

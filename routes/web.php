@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\AssignmentGroupController;
-use App\Livewire\Counter;
 use App\Livewire\ShowSingleAssignmentGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -26,17 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::view('profile', 'profile')
         ->name('profile');
 
-//    Route::resource('assignment-group', AssignmentGroupController::class)
-//        ->except('index');
-
-    Route::get('assignment-group/{id}', ShowSingleAssignmentGroup::class)
+    Route::get('assignment-group/{assignmentGroup}', ShowSingleAssignmentGroup::class)
         ->name('assignment-group.show-single');
-
-    Route::get('assignment-groups', [AssignmentGroupController::class, 'index'])
-        ->name('assignment-group.index');
-
 });
-
-Route::get('/counter', Counter::class);
 
 require __DIR__ . '/auth.php';
