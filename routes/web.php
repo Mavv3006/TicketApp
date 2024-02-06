@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AssignmentGroupController;
+use App\Livewire\Counter;
+use App\Livewire\ShowSingleAssignmentGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +18,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::view('dashboard', 'dashboard')
+        ->middleware(['verified'])
+        ->name('dashboard');
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+    Route::view('profile', 'profile')
+        ->name('profile');
 
-require __DIR__.'/auth.php';
+//    Route::resource('assignment-group', AssignmentGroupController::class)
+//        ->except('index');
+
+    Route::get('assignment-group/{id}', ShowSingleAssignmentGroup::class)
+        ->name('assignment-group.show-single');
+
+    Route::get('assignment-groups', [AssignmentGroupController::class, 'index'])
+        ->name('assignment-group.index');
+
+});
+
+Route::get('/counter', Counter::class);
+
+require __DIR__ . '/auth.php';
